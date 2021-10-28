@@ -16,31 +16,31 @@ class Product extends Model
         return $this->belongsTo(ProductType::class,'product_type_id');
     }
 
-    public function getAllProduct(){
+    public function customerGetAllProduct(){
         // $products  = Product::where('status',1)->get(['name','image','price','description']);
         $products  = $this->where('status',1)->paginate(16);
         return $products;
     }
 
-    public function getProductById($id){
+    public function customerGetProductById($id){
         return $this->where('status',1)->findOrFail($id);
     }
 
-    public function getRelateProduct($typeProductId){
+    public function customerGetRelateProduct($typeProductId){
         // return $this->where('product_type_id',$typeProductId)->where('status',1)->firstOrFail();
         return $this->where('product_type_id',$typeProductId)->where('status',1)->get();
     }
 
-    public function getLatestProduct(){
-        return $products = Product::where('status',1)->latest()->take(10)->get();
+    public function customerGetLatestProduct(){
+        return $products = Product::where('status',1)->latest()->take(8)->get();
     }
 
-    public function scopeSearch($query, $val){
+    public function customerScopeSearch($query, $val){
         return $query->where('name','like','%'.$val.'%')
-                ->orWhere('price','like','%'.$val.'%');
+                ->orWhere('price','like','%'.$val.'%')->where('status',1);
     }
 
-    public function scopeGetImageById($query, $id){
+    public function customerScopeGetImageById($query, $id){
         return $query->where('id',$id)->first('image');
     }
 }
