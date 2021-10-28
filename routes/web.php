@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\Customer\Page\Index;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,13 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('/test', function (){
-    return view('test');
-})->name('customer.index');
+
+Route::get('/',Index::class)->name('customer.index');
+
+
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
