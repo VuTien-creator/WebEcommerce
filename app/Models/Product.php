@@ -28,7 +28,7 @@ class Product extends Model
 
     public function customerGetRelateProduct($typeProductId){
         // return $this->where('product_type_id',$typeProductId)->where('status',1)->firstOrFail();
-        return $this->where('product_type_id',$typeProductId)->where('status',1)->get();
+        return $this->where('status',1)->where('product_type_id',$typeProductId)->get(['id','name','price','image']);
     }
 
     public function customerGetLatestProduct(){

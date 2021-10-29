@@ -45,5 +45,11 @@ class Shop extends Component
         ])
         ->layout('customer.layout');;
     }
-
+    public function sortBy($column){
+        dd('here');
+    }
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
 }

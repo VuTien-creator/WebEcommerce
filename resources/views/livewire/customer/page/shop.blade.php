@@ -1,5 +1,5 @@
 <div>
-    
+
 
     <!-- Product Section Begin -->
     <section class="product spad">
@@ -30,10 +30,12 @@
                     </div>
                     <div class="row">
                         @foreach ($products as $product)
-                            <div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="col-lg-4 col-md-6 col-sm-6 ">
                                 <div class="product__item">
                                     <div class="product__item__pic">
-                                        <img src="{{ $product->image }}" alt="{{ $product->image }}">
+                                        <a href="{{ route('customer.productDetail',$product->id) }}">
+                                            <img src="{{ $product->image }}" alt="{{ $product->image }}">
+                                        </a>
                                         <ul class="product__item__pic__hover">
                                             <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
                                         </ul>
