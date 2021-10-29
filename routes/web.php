@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Livewire\Customer\Page\Index;
+use App\Http\Livewire\Customer\Page\Shop;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/',Index::class)->name('customer.index');
 
+Route::get('/shop',Shop::class)->name('customer.shop');
 
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {

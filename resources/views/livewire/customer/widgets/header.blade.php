@@ -35,7 +35,7 @@
                 <ul>
                     <li class="{{ Request::path() == '/' ? 'active' : '' }}"><a
                             href="{{ route('customer.index') }}">Home</a></li>
-                    <li class="{{ Request::path() == 'shop' ? 'active' : '' }}"><a href="#">Shop</a></li>
+                    <li class="{{ Request::path() == 'shop' ? 'active' : '' }}"><a href="{{ route('customer.shop') }}">Shop</a></li>
                     <li class="{{ Request::path() == 'cart' ? 'active' : '' }}"><a href="#">Cart</a></li>
                     @auth
                         <li class="{{ Request::path() == 'checkout' ? 'active' : '' }}"><a href="#">Checkout</a></li>
@@ -96,7 +96,7 @@
                             <ul>
                                 <li class="{{ Request::path() == '/' ? 'active' : '' }}"><a
                                         href="{{ route('customer.index') }}">Home</a></li>
-                                <li class="{{ Request::path() == 'shop' ? 'active' : '' }}"><a href="#">Shop</a></li>
+                                <li class="{{ Request::path() == 'shop' ? 'active' : '' }}"><a href="{{ route('customer.shop') }}">Shop</a></li>
                                 <li class="{{ Request::path() == 'cart' ? 'active' : '' }}"><a href="#">Cart</a></li>
                                 @auth
                                     <li class="{{ Request::path() == 'checkout' ? 'active' : '' }}"><a

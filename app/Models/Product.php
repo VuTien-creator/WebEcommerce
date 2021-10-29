@@ -18,7 +18,7 @@ class Product extends Model
 
     public function customerGetAllProduct(){
         // $products  = Product::where('status',1)->get(['name','image','price','description']);
-        $products  = $this->where('status',1)->paginate(16);
+        $products  = $this->where('status',1)->paginate(15);
         return $products;
     }
 
