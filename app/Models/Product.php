@@ -16,9 +16,9 @@ class Product extends Model
         return $this->belongsTo(ProductType::class,'product_type_id');
     }
 
-    public function customerGetAllProduct(){
-        // $products  = Product::where('status',1)->get(['name','image','price','description']);
-        $products  = $this->where('status',1)->paginate(15);
+    public static function customerGetAllProduct(){
+        $products  = (new static)::where('status',1)->paginate(15);
+        // $products  = $this->where('status',1)->paginate(15);
         return $products;
     }
 

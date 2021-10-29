@@ -27,7 +27,7 @@ class Shop extends Component
         }elseif($this->sort ==2){
             $this->sort = 'price';
         }
-        
+
         $obj = new Product;
 
         $this->latestProducts = $obj->customerGetLatestProduct();
@@ -39,18 +39,11 @@ class Shop extends Component
     public function render()
     {
         return view('livewire.customer.page.shop',[
-            'products' => Product::where('status',1)->orderBy($this->sort)->paginate(15),
+            // 'products' => Product::where('status',1)->orderBy($this->sort)->paginate(15),
+            'products' =>Product::customerGetAllProduct()
             // 'latestProducts'=>$this->latestProducts,
         ])
         ->layout('customer.layout');;
-    }
-
-    public function sortBy($column){
-        dd('here');
-    }
-    public function updatingSearch()
-    {
-        $this->resetPage();
     }
 
 }
