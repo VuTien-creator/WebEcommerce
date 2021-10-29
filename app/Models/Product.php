@@ -35,12 +35,12 @@ class Product extends Model
         return $products = Product::where('status',1)->latest()->take(8)->get();
     }
 
-    public function customerScopeSearch($query, $val){
+    public function scopeCustomerSearch($query, $val){
         return $query->where('name','like','%'.$val.'%')
                 ->orWhere('price','like','%'.$val.'%')->where('status',1);
     }
 
-    public function customerScopeGetImageById($query, $id){
+    public function scopeCustomerGetImageById($query, $id){
         return $query->where('id',$id)->first('image');
     }
 }

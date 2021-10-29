@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\Customer\Page\Cart;
 use App\Http\Livewire\Customer\Page\Index;
 use App\Http\Livewire\Customer\Page\ProductDetail;
 use App\Http\Livewire\Customer\Page\Shop;
@@ -23,6 +24,8 @@ Route::get('/',Index::class)->name('customer.index');
 Route::get('/shop',Shop::class)->name('customer.shop');
 
 Route::get('/product-detail-{id}',ProductDetail::class)->name('customer.productDetail');
+
+Route::get('/cart',Cart::class)->name('customer.cart');
 
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
