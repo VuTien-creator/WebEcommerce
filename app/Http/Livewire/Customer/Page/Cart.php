@@ -13,8 +13,11 @@ class Cart extends Component
 
     public function mount()
     {
+
+        $cartSubTotal =str_replace( ',', '',FacadesCart::subTotal(0));
         
-        $this->cartSubTotal = (int)FacadesCart::subTotal(0,0,0);
+        $this->cartSubTotal = (int)$cartSubTotal ;
+
 
         $this->cart = FacadesCart::content();
 

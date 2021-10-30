@@ -73,7 +73,6 @@
                         <div class="shoping__checkout">
                             <h5>Cart Total</h5>
                             <ul>
-                                {{-- {{ dd($cartSubTotal) }} --}}
                                 <li>Subtotal <span>{{ number_format($cartSubTotal) }} VND</span></li>
                                 <li>Total <span>{{ number_format($cartSubTotal) }} VND</span></li>
                             </ul>
