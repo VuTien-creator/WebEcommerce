@@ -2,23 +2,21 @@
 
 namespace App\Http\Responses;
 
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
-use Laravel\Fortify\Contracts\LoginResponse as LoginResponseContract;
+use Laravel\Fortify\Contracts\RegisterResponse as RegisterResponseContract;
 
-class LoginResponse implements LoginResponseContract
+class RegisterResponse implements RegisterResponseContract
 {
-
-    /**
-     * @inheritDoc
-     */
     public function toResponse($request)
     {
-
-        // return $request->wantsJson()? redirect
+        // below is the existing response
+        // replace this with your own code
         if($request->wantsJson()){
-            return    response()->json(['two_factor' =>  false]);
+            return new JsonResponse('',201);
         }else{
-            $role = Auth::user()->role->role ; //check admin or cutomer or something ...
+            $role = Auth::user()->role->role;
             if($role ==='customer'){
                 return redirect()->route('customer.index');
             }elseif($role ==='admin'){
@@ -27,6 +25,5 @@ class LoginResponse implements LoginResponseContract
                 return redirect()->to('/404');
             }
         }
-
     }
 }
