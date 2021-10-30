@@ -13,9 +13,9 @@
             </div>
             <div class="humberger__menu__cart">
                 <ul>
-                    <li><a href="{{ asset('client') }}/#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                    <li><a href="{{ route('customer.cart') }}"><i class="fa fa-shopping-cart"></i> <span>{{ $countItem }}</span></a></li>
                 </ul>
-                <div class="header__cart__price">item: <span>$150.00</span></div>
+                <div class="header__cart__price">item: <span>{{ number_format($cartSubTotal) }} VND</span></div>
             </div>
             <div class="humberger__menu__widget">
                 <div class="header__top__right__language">
@@ -71,11 +71,26 @@
                                 <div class="header__top__right__social">
                                     <a href="{{ route('login') }}"><i class="fa fa-user"></i> Login</a>
                                 </div>
+                                <div class="header__top__right__social">
+                                    <a href="{{ route('register') }}"><i class="fa fa-user"></i> Register</a>
+                                </div>
                                 @endguest
 
                                 @auth
+                                <div class="header__top__right__social">
+                                    <a href="{{ route('profile.show') }}"><i class="fa fa-user"></i> Profile</a>
+                                </div>
                                 <div class="header__top__right__auth">
-                                    <a href="{{ asset('client') }}/#"><i class="fa fa-user"></i> Logout</a>
+                                    {{-- <a href=""><i class="fa fa-user"></i> Logout</a> --}}
+                                    <form method="POST" action="{{ route('logout') }}">
+                                        @csrf
+                                            <a class="" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                                    this.closest('form').submit(); " role="button">
+                                                <i class="fas fa-sign-out-alt"></i>
+
+                                                {{ __('Log Out') }}
+                                            </a>
+                                    </form>
                                 </div>
                                 @endauth
                             </div>
@@ -97,7 +112,7 @@
                                 <li class="{{ Request::path() == '/' ? 'active' : '' }}"><a
                                         href="{{ route('customer.index') }}">Home</a></li>
                                 <li class="{{ Request::path() == 'shop' ? 'active' : '' }}"><a href="{{ route('customer.shop') }}">Shop</a></li>
-                                <li class="{{ Request::path() == 'cart' ? 'active' : '' }}"><a href="#">Cart</a></li>
+                                <li class="{{ Request::path() == 'cart' ? 'active' : '' }}"><a href="{{ route('customer.cart') }}">Cart</a></li>
                                 @auth
                                     <li class="{{ Request::path() == 'checkout' ? 'active' : '' }}"><a
                                             href="#">Checkout</a>
@@ -109,10 +124,10 @@
                     <div class="col-lg-3">
                         <div class="header__cart">
                             <ul>
-                                <li><a href="/#"><i class="fa fa-shopping-bag"></i>
-                                        <span>3</span></a></li>
+                                <li><a href="{{ route('customer.cart') }}"><i class="fa fa-shopping-cart"></i>
+                                        <span>{{ $countItem }}</span></a></li>
                             </ul>
-                            <div class="header__cart__price">item: <span>$150.00</span></div>
+                            <div class="header__cart__price">item: <span>{{ number_format($cartSubTotal) }} VND</span></div>
                         </div>
                     </div>
                 </div>
@@ -160,10 +175,10 @@
                         @if (Request::path() == '/')
                             <div class="hero__item set-bg" data-setbg="{{ asset('client') }}/img/hero/banner.jpg">
                                 <div class="hero__text">
-                                    <span>FRUIT FRESH</span>
-                                    <h2>Vegetable <br />100% Organic</h2>
+                                    <span>Good Choice</span>
+                                    <h2>New Product <br /></h2>
                                     <p>Free Pickup and Delivery Available</p>
-                                    <a href="{{ asset('client') }}/#" class="primary-btn">SHOP NOW</a>
+                                    <a href="{{ route('customer.shop') }}" class="primary-btn">SHOP NOW</a>
                                 </div>
                             </div>
                         @endif

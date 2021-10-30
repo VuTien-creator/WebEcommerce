@@ -27,7 +27,7 @@
                         </div>
                         <a href="#" class="primary-btn">ADD TO CARD</a>
                         <ul>
-                            <li><b>Availability</b> <span>In Stock</span></li>
+                            <li><b>Availability</b> <span>{!! $product->quantity <= 0 ? "<samp>Out of stock</samp>":'In Stock' !!}</span></li>
                             <li><b>Shipping</b> <span> <samp>Free pickup</samp></span></li>
                         </ul>
                     </div>

@@ -13,8 +13,7 @@ class Cart extends Component
 
     public function mount()
     {
-        $test = Product::where('id',20)->first();
-        FacadesCart::add($test->id, $test->name, 2,$test->price);
+        
         $this->cartSubTotal = (int)FacadesCart::subTotal(0,0,0);
 
         $this->cart = FacadesCart::content();
