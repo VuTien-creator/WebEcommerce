@@ -24,7 +24,8 @@ class ProductFactory extends Factory
             'status'=>rand(0,2),
             'image'=>$this->faker->imageUrl(),
             'price'=>rand(100000,500000),
-            'description'=>$this->faker->text(500)
+            'description'=>$this->faker->text(500),
+            'quantity' => rand(0,50)
         ];
     }
 }
