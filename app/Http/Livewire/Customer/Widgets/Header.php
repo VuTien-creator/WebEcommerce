@@ -18,11 +18,13 @@ class Header extends Component
         $obj = new ProductType;
         $this->categories = $obj->customerGetCategories();
 
-        $this->cartSubTotal = Cart::subTotal(0,0,0);
+        $cartSubTotal =str_replace( ',', '',Cart::subTotal(0));
+
+        $this->cartSubTotal = (int)$cartSubTotal ;
 
         $this->countItem = Cart::content()->count();
     }
-    
+
     public function render()
     {
         return view('livewire.customer.widgets.header');

@@ -30,6 +30,7 @@
             </div>
             <div class="row featured__filter">
                 @foreach ($latestProducts as $product)
+                {{-- {{ dd($product) }} --}}
                 <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
                     <div class="featured__item">
                         <div class="featured__item__pic">
@@ -37,8 +38,7 @@
                                 <img src="{{ $product->image }}" alt="{{ $product->name }}">
                             </a>
                             <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a>
-                                </li>
+                            <livewire:customer.feature.add-to-cart :product="$product">
                             </ul>
                         </div>
                         <div class="featured__item__text">

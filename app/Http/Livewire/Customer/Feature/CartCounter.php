@@ -2,23 +2,19 @@
 
 namespace App\Http\Livewire\Customer\Feature;
 
-use Gloudemans\Shoppingcart\Facades\Cart;
 use Livewire\Component;
 
+use App\Facades\Cart as FacadeCart;
 class CartCounter extends Component
 {
     protected $cartSubTotal;
 
     protected $countItem;
 
-    protected $listeners = ['cartCounter' =>'mount'];
+    protected $listeners = ['cartCounter' =>'updateCart'];
 
     public function mount(){
-        $cartSubTotal =str_replace( ',', '',Cart::subTotal(0));
-
-        $this->cartSubTotal = (int)$cartSubTotal ;
-
-        $this->countItem = Cart::content()->count();
+        $this->updateCart();
     }
 
     public function render()
@@ -28,4 +24,10 @@ class CartCounter extends Component
             'countItem'=>$this->countItem
         ]);
     }
+
+    public function updateCart(){
+        $this->cartSubTotal = FacadeCart::total();
+        $this->countItem = FacadeCart::content()->count();
+    }
+
 }
