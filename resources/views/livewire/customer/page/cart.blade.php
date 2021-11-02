@@ -40,7 +40,8 @@
                                             </td>
                                             <td class="shoping__cart__quantity">
                                                 {{-- <livewire:customer.feature.update-cart :product='$product'> --}}
-                                                <button
+                                                <div>
+                                                    <button
                                                     class="text-sm p-2 border-2 rounded border-gray-200 hover:border-gray-300 bg-gray-200 hover:bg-gray-300"
                                                     wire:click="updateCartItem({{ $id }}, 'minus')"> -
                                                 </button>
@@ -49,6 +50,11 @@
                                                     class="text-sm p-2 border-2 rounded border-gray-200 hover:border-gray-300 bg-gray-200 hover:bg-gray-300"
                                                     wire:click="updateCartItem({{ $id }}, 'plus')"> +
                                                 </button>
+                                                </div>
+                                                @if (isset($message[$id]))
+
+                                                <div><span> {{ $message[$id] }} </span></div>
+                                                @endif
                                             </td>
                                             <td class="shoping__cart__total">
                                                 {{ number_format($product['price'] * $product['quantity']) }} VND
@@ -80,7 +86,7 @@
                                 <li>Subtotal <span>{{ $cartSubTotal }} VND</span></li>
                                 <li>Total <span>{{ $cartSubTotal }} VND</span></li>
                             </ul>
-                            <a href="#" class="primary-btn">PROCEED TO CHECKOUT</a>
+                            <a href="{{ route('customer.checkout') }}" class="primary-btn">PROCEED TO CHECKOUT</a>
                         </div>
                     </div>
                 </div>

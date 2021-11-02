@@ -38,7 +38,7 @@
                     <li class="{{ Request::path() == 'shop' ? 'active' : '' }}"><a href="{{ route('customer.shop') }}">Shop</a></li>
                     <li class="{{ Request::path() == 'cart' ? 'active' : '' }}"><a href="{{ route('customer.cart') }}">Cart</a></li>
                     @auth
-                        <li class="{{ Request::path() == 'checkout' ? 'active' : '' }}"><a href="#">Checkout</a></li>
+                        <li class="{{ Request::path() == 'checkout' ? 'active' : '' }}"><a href="{{ route('customer.checkout') }}">Checkout</a></li>
                     @endauth
                 </ul>
             </nav>

@@ -18,16 +18,31 @@
                         <h3>{{ $product->name }}</h3>
                         <div class="product__details__price">{{ number_format($product->price) }} VND</div>
                         <p>{{ $product->description }}</p>
-                        <div class="product__details__quantity">
+                        <div class="product__details__quantity ">
                             <div class="quantity">
-                                <div class="pro-qty">
-                                    <input type="text" value="1">
+                                <div class="">
+                                    {{-- <input  type="number" type="number" min="1" wire:model="quantity"> --}}
+                                    <button
+                                        class="text-sm p-2 border-2 rounded border-gray-200 hover:border-gray-300 bg-gray-200 hover:bg-gray-300"
+                                        wire:click="updateQuantity('minus')"> -
+                                    </button>
+                                    {{ $quantity }}
+                                    <button
+                                        class="text-sm p-2 border-2 rounded border-gray-200 hover:border-gray-300 bg-gray-200 hover:bg-gray-300"
+                                        wire:click="updateQuantity('plus')"> +
+                                    </button>
                                 </div>
                             </div>
+
                         </div>
-                        <a href="#" class="primary-btn">ADD TO CARD</a>
+                        <a style="cursor: -webkit-grab" wire:click='addToCart' class="primary-btn">ADD TO CARD</a>
+                        @if ($show)
+                        <div >
+                            {{  $message }}
+                        </div>
+                        @endif
                         <ul>
-                            <li><b>Availability</b> <span>{!! $product->quantity <= 0 ? "<samp>Out of stock</samp>":'In Stock' !!}</span></li>
+                            <li><b>Availability</b> <span>{!! $product->quantity <= 0 ? '<samp>Out of stock</samp>' : 'In Stock' !!}</span></li>
                             <li><b>Shipping</b> <span> <samp>Free pickup</samp></span></li>
                         </ul>
                     </div>
@@ -85,7 +100,7 @@
                                             <img src="{{ $product->image }}" alt="{{ $product->name }}">
                                         </a>
                                         <ul class="product__item__pic__hover">
-                                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                            <livewire:customer.feature.add-to-cart :product='$product'>
                                         </ul>
                                     </div>
                                     <div class="product__item__text">
@@ -107,12 +122,13 @@
                                         <img src="{{ $product->image }}" alt="{{ $product->name }}">
                                     </a>
                                     <ul class="product__item__pic__hover">
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                        <livewire:customer.feature.add-to-cart :product='$product'>
                                     </ul>
                                 </div>
                                 <div class="product__item__text">
-                                    <h6><a href="{{ route('customer.productDetail', $product->id) }}">{{ $product->name }}</a>
-                                    <h5>{{ number_format($product->price) }} VND</h5>
+                                    <h6><a
+                                            href="{{ route('customer.productDetail', $product->id) }}">{{ $product->name }}</a>
+                                        <h5>{{ number_format($product->price) }} VND</h5>
                                 </div>
                             </div>
                         </div>

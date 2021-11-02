@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="{{ asset('client') }}/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="{{ asset('client') }}/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="{{ asset('client') }}/css/style.css" type="text/css">
+
     @livewireStyles
 
 </head>

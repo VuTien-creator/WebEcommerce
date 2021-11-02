@@ -12,35 +12,24 @@ class Cart extends Component
     protected $cart;
     protected $cartSubTotal;
 
-    public $message = '';
+    public $message = [];
     public function mount()
     {
 
-        // $cartSubTotal =str_replace( ',', '',FacadesCart::subTotal(0));
-
-        // $this->cartSubTotal = (int)$cartSubTotal ;
-
-
-        // $this->cart = FacadesCart::content();
-
-        // foreach ($this->cart as $product) {
-        //     $product->image = Product::query()->CustomerGetImageById($product->id);
-        // }
-
         $this->updateCart();
-
     }
 
     public function render()
     {
-        return view('livewire.customer.page.cart',[
+        return view('livewire.customer.page.cart', [
             'cart' => $this->cart,
             'cartSubTotal' => $this->cartSubTotal
         ])
-        ->layout('customer.layout');
+            ->layout('customer.layout');
     }
 
-    public function updateCart(){
+    public function updateCart()
+    {
         $this->cartSubTotal = AppFacadesCart::total();
         $this->cart = AppFacadesCart::content();
 
@@ -66,8 +55,37 @@ class Cart extends Component
      */
     public function updateCartItem(string $id, string $action): void
     {
-        AppFacadesCart::update($id, $action);
-        $this->updateCart();
-        $this->emit('cartCounter');
+        $cart = AppFacadesCart::content();
+        //check product in cart
+        try {
+            $product = Product::select('id', 'quantity')
+                ->where('id', $id)
+                ->pluck('quantity', 'id');
+        } catch (\Exception $e) {
+            $this->message = 'Product not found in your cart';
+        }
+
+        $quantity = $cart[$id]['quantity'];
+
+        switch ($action) {
+            case 'plus':
+                $quantity += 1;
+                break;
+            case 'minus':
+                $quantity -= 1;
+                break;
+        }
+        //check item's quantity with quantity in stock
+        if ($product[$id] < $quantity) {
+            $this->message[$id] = "Item's quantity greater quantity in stock";
+            $this->updateCart();
+
+        } else {
+            // dd(1);
+            AppFacadesCart::update($id, $action);
+
+            $this->updateCart();
+            $this->emit('cartCounter');
+        }
     }
 }
