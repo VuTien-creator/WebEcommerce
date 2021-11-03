@@ -37,7 +37,7 @@
                                             <img src="{{ $product->image }}" alt="{{ $product->image }}">
                                         </a>
                                         <ul class="product__item__pic__hover">
-                                            <livewire:customer.feature.add-to-cart :product="$product">
+                                            <livewire:customer.feature.add-to-cart :product="$product" :key="time().$product->id">
                                         </ul>
                                     </div>
                                     <div class="product__item__text">
@@ -54,7 +54,7 @@
                                 <p>Showing {{ $products->firstItem() }} to {{ $products->lastItem() }}</p>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6">
-                                {{ $products->links() }}
+                                {{ ($products->links()) }}
                             </div>
                         </div>
                     </div>

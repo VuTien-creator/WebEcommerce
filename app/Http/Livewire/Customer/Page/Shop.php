@@ -39,13 +39,13 @@ class Shop extends Component
     public function render()
     {
         return view('livewire.customer.page.shop',[
-            // 'products' => Product::where('status',1)->orderBy($this->sort)->paginate(15),
-            'products' =>Product::customerGetAllProduct()
+            'products' => Product::where('status',1)->orderBy($this->sort)->paginate(15),
+            // 'products' =>Product::customerGetAllProduct()
             // 'latestProducts'=>$this->latestProducts,
         ])
         ->layout('customer.layout');;
     }
-    
+
     public function sortBy($column){
         dd('here');
     }

@@ -10,12 +10,14 @@ use Livewire\Component;
 class Cart extends Component
 {
     protected $cart;
+
     protected $cartSubTotal;
 
     public $message = [];
+
     public function mount()
     {
-
+        // Cart::clear();
         $this->updateCart();
     }
 
