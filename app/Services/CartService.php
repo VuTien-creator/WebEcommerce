@@ -122,7 +122,7 @@ class CartService {
      *
      * @return string
      */
-    public function total(): string
+    public function total()
     {
         $content = $this->getContent();
 
@@ -130,7 +130,9 @@ class CartService {
             return $total += $item->get('price') * $item->get('quantity');
         });
 
-        return number_format($total);
+        // return number_format($total);
+        return ($total);
+
     }
 
     /**
