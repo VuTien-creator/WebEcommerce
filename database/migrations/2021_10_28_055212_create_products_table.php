@@ -21,7 +21,7 @@ class CreateProductsTable extends Migration
             $table->string('slug');
             $table->boolean('status');
             $table->string('image');
-            $table->float('price');
+            $table->decimal('price');
             $table->longText('description');
             $table->timestamps();
         });

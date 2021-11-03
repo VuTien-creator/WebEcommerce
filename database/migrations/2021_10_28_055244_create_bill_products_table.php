@@ -13,13 +13,13 @@ class CreateBillProductsTable extends Migration
      */
     public function up()
     {
-        Schema::create('bill_products', function (Blueprint $table) {
+        Schema::create('bill_product', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('bill_id')->unsigned()->nullable();
             $table->foreign('bill_id')->references('id')->on('bills')->onUpdate('cascade')->onDelete('cascade');
             $table->bigInteger('product_id')->unsigned()->nullable();
             $table->foreign('product_id')->references('id')->on('products')->onUpdate('cascade')->onDelete('cascade');
-            $table->float('price');
+            $table->decimal('price');
             $table->integer('quantity');
             $table->timestamps();
         });
@@ -32,6 +32,6 @@ class CreateBillProductsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bill_products');
+        Schema::dropIfExists('bill_product');
     }
 }
