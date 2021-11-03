@@ -31,7 +31,7 @@ Route::get('/cart',Cart::class)->name('customer.cart');
 
 
 Route::middleware(['auth'])->group(function () {
-    
+
     Route::get('/checkout',Checkout::class)->name('customer.checkout');
 });
 

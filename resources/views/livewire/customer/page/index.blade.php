@@ -38,7 +38,7 @@
                                 <img src="{{ $product->image }}" alt="{{ $product->name }}">
                             </a>
                             <ul class="featured__item__pic__hover">
-                            <livewire:customer.feature.add-to-cart :product="$product">
+                            <livewire:customer.feature.add-to-cart :product="$product" :key="time().$product->id">
                             </ul>
                         </div>
                         <div class="featured__item__text">
