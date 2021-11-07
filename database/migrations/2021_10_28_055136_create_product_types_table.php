@@ -18,7 +18,7 @@ class CreateProductTypesTable extends Migration
             $table->bigInteger('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->string('name');
-            $table->string('slug');
+            $table->string('slug')->nullable();
             $table->boolean('status');
             $table->timestamps();
         });
