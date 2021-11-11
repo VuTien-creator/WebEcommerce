@@ -22,6 +22,7 @@ class CreateProductsTable extends Migration
             $table->boolean('status');
             $table->string('image');
             $table->decimal('price');
+            $table->integer('quantity_product_sold');
             $table->longText('description');
             $table->timestamps();
         });

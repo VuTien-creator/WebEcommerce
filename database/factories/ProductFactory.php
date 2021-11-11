@@ -25,7 +25,8 @@ class ProductFactory extends Factory
             'image'=>$this->faker->imageUrl(),
             'price'=>rand(100000,500000),
             'description'=>$this->faker->text(500),
-            'quantity' => rand(0,50)
+            'quantity' => rand(0,50),
+            'quantity_product_sold'=> 0
         ];
     }
 }

@@ -70,6 +70,7 @@ class Checkout extends Component
                     ]);
 
                     Product::find($id)->decrement('quantity', $cartProduct['quantity']);
+                    Product::find($id)->increment('quantity_product_sold',$cartProduct['quantity']);
                 }
 
                 Cart::clear();
@@ -86,7 +87,7 @@ class Checkout extends Component
         } catch (\Exception $e) {
             //throw $th;
             $this->message = 'something wrong, try again or contact us';
-            dd($e->getMessage());
+            // dd($e->getMessage());
         }
     }
 }
