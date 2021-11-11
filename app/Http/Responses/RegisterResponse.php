@@ -20,7 +20,8 @@ class RegisterResponse implements RegisterResponseContract
             if($role ==='customer'){
                 return redirect()->route('customer.index');
             }elseif($role ==='admin'){
-                return redirect()->intended(config('fortify.home'));
+                return redirect()->route('admin.index');
+                // return redirect()->intended(config('fortify.home'));
             }else{
                 return redirect()->to('/404');
             }

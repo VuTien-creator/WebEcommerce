@@ -22,7 +22,8 @@ class LoginResponse implements LoginResponseContract
             if($role ==='customer'){
                 return redirect()->route('customer.index');
             }elseif($role ==='admin'){
-                return redirect()->intended(config('fortify.home'));
+                // return redirect()->intended(config('fortify.home'));
+                return redirect()->route('admin.index');
             }else{
                 return redirect()->to('/404');
             }
