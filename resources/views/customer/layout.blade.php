@@ -28,25 +28,36 @@
 
 <body>
 
-            <livewire:customer.widgets.header>
+    <div>
+        {{-- <div> --}}
 
-                {{ $slot }}
+        <livewire:customer.widgets.header>
+            <livewire:customer.widgets.search>
+                <!-- Breadcrumb Section Begin -->
+                <section class="breadcrumb-section ">
+                    <img src="{{ asset('client') }}/img/breadcrumb.jpg" alt="">
+                </section>
+                <!-- Breadcrumb Section End -->
+                {{-- </div> --}}
+    </div>
 
-
-            <livewire:customer.widgets.footer>
-
-            <!-- Js Plugins -->
-            <script src="{{ asset('client') }}/js/jquery-3.3.1.min.js"></script>
-            <script src="{{ asset('client') }}/js/bootstrap.min.js"></script>
-            <script src="{{ asset('client') }}/js/jquery.nice-select.min.js"></script>
-            <script src="{{ asset('client') }}/js/jquery-ui.min.js"></script>
-            <script src="{{ asset('client') }}/js/jquery.slicknav.js"></script>
-            <script src="{{ asset('client') }}/js/mixitup.min.js"></script>
-            <script src="{{ asset('client') }}/js/owl.carousel.min.js"></script>
-            <script src="{{ asset('client') }}/js/main.js"></script>
+    {{ $slot }}
 
 
-            @livewireScripts
+    <livewire:customer.widgets.footer>
+
+        <!-- Js Plugins -->
+        <script src="{{ asset('client') }}/js/jquery-3.3.1.min.js"></script>
+        <script src="{{ asset('client') }}/js/bootstrap.min.js"></script>
+        <script src="{{ asset('client') }}/js/jquery.nice-select.min.js"></script>
+        <script src="{{ asset('client') }}/js/jquery-ui.min.js"></script>
+        <script src="{{ asset('client') }}/js/jquery.slicknav.js"></script>
+        <script src="{{ asset('client') }}/js/mixitup.min.js"></script>
+        <script src="{{ asset('client') }}/js/owl.carousel.min.js"></script>
+        <script src="{{ asset('client') }}/js/main.js"></script>
+
+
+        @livewireScripts
 </body>
 
 </html>

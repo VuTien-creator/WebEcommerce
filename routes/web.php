@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ProductTypeController;
 use App\Http\Livewire\Customer\Page\Cart;
 use App\Http\Livewire\Customer\Page\Checkout;
 use App\Http\Livewire\Customer\Page\Index;
@@ -33,8 +36,26 @@ Route::get('/cart',Cart::class)->name('customer.cart');
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/checkout',Checkout::class)->name('customer.checkout');
-});
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+
+    //Admin role
+    Route::group(['middleware'=>'admin','prefix'=>'admin'],function () {
+
+        Route::get('index',[AdminController::class,'index'])->name('admin.index');
+
+        //product
+        //get product by product_type_id
+            Route::get('product-of-type-{id}',[AdminController::class,'getProductByTypeId'])->name('admin.getProductByType');
+
+        Route::resource('product', ProductController::class);
+
+        //product type
+
+        Route::resource('product-type', ProductTypeController::class);
+
+        //management
+        Route::get('management',[AdminController::class,'manage'])->name('admin.manage');
+        Route::get('bill-detail-{id}',[AdminController::class,'billDetail'])->name('admin.billDetail');
+
+    });
+});
