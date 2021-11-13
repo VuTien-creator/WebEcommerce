@@ -11,4 +11,8 @@ class BillProduct extends Model
     protected $table = 'bill_product';
 
     protected $fillable =['bill_id','product_id','price','quantity'];
+
+    public function bill(){
+        // return $this->belongsTo(Bill::)
+    }
 }
