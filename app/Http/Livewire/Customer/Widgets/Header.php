@@ -8,15 +8,15 @@ use Livewire\Component;
 
 class Header extends Component
 {
-    public $categories;
+    // public $categories;
 
     public int $cartSubTotal;
 
     public int $countItem;
 
     public function mount(){
-        $obj = new ProductType;
-        $this->categories = $obj->customerGetCategories();
+        // $obj = new ProductType;
+        // $this->categories = $obj->customerGetCategories();
 
         $cartSubTotal =str_replace( ',', '',Cart::subTotal(0));
 

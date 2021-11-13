@@ -69,6 +69,9 @@ class Checkout extends Component
                         'price' => $cartProduct['price']
                     ]);
 
+                    // $product = Product::where('id',$id)->get();
+                    // $product->quantity -= $cartProduct['quantity'];
+                    // $product->quantity_product_sold += $cartProduct['quantity'];
                     Product::find($id)->decrement('quantity', $cartProduct['quantity']);
                     Product::find($id)->increment('quantity_product_sold',$cartProduct['quantity']);
                 }

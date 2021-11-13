@@ -8,7 +8,7 @@
                     <div class="product__details__pic">
                         <div class="product__details__pic__item">
                             <img class="product__details__pic__item--large"
-                                src="{{ asset('client') }}/img/product/details/product-details-1.jpg" alt="">
+                                src="{{ asset($product->image) }}" alt="{{ $product->name }}">
                         </div>
 
                     </div>

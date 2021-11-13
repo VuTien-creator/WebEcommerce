@@ -17,7 +17,7 @@
                             <div class="col-lg-6">
                                 <div class="checkout__input">
                                     <p>Your Email<span></span></p>
-                                    <input type="text"  value="{{ Auth::user()->email }}" readonly>
+                                    <input type="text" value="{{ Auth::user()->email }}" readonly>
                                 </div>
                             </div>
                         </div>
@@ -48,13 +48,17 @@
                                         {{-- {{ dd($product) }} --}}
                                         <li>{{ $product['name'] }}
                                             <span>{{ number_format($product['price'] * $product['quantity']) }}
-                                                VND</span></li>
+                                                VND</span>
+                                        </li>
                                     @endforeach
                                 </ul>
                                 <div class="checkout__order__subtotal">Subtotal <span>{{ $subTotal }} VND</span>
                                 </div>
                                 <div class="checkout__order__total">Total <span>{{ $subTotal }} VND</span></div>
-                                <button type="submit" wire:click.prevent='checkout' class="site-btn">PLACE ORDER</button>
+                                <button type="submit" wire:click.prevent='checkout' class="site-btn">PLACE
+                                    ORDER</button>
+
+                                
                             @endif
                         </div>
                     </div>
