@@ -23,7 +23,7 @@
                     <div>English</div>
                     <span class="arrow_carrot-down"></span>
                     <ul>
-                        <li><a href="#">Spanis</a></li>
+                        <li><a href="#">VietNamese</a></li>
                         <li><a href="#">English</a></li>
                     </ul>
                 </div>
@@ -78,7 +78,7 @@
 
                                 @auth
                                 <div class="header__top__right__social">
-                                    <a href="{{ route('profile.show') }}"><i class="fa fa-user"></i> Profile</a>
+                                    <a href="#"><i class="fa fa-user"></i> Profile</a>
                                 </div>
                                 <div class="header__top__right__auth">
                                     {{-- <a href=""><i class="fa fa-user"></i> Logout</a> --}}

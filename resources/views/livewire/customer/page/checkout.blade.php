@@ -23,13 +23,13 @@
                         </div>
                         <div class="row">
                             <div class="checkout__input col-lg-6">
-                                <p>Address<span>*</span></p>
-                                <input type="text" placeholder="Street Address" class="checkout__input__add">
+                                <p>Address</p>
+                                <input type="text" placeholder="Street Address" required class="checkout__input__add">
                             </div>
                             <div class="col-lg-6">
                                 <div class="checkout__input">
-                                    <p>Phone<span>*</span></p>
-                                    <input type="text">
+                                    <p>Phone</p>
+                                    <input required type="text">
                                 </div>
                             </div>
                         </div>
@@ -52,13 +52,13 @@
                                         </li>
                                     @endforeach
                                 </ul>
-                                <div class="checkout__order__subtotal">Subtotal <span>{{ $subTotal }} VND</span>
+                                <div class="checkout__order__subtotal">Subtotal <span>{{ number_format($subTotal) }} VND</span>
                                 </div>
-                                <div class="checkout__order__total">Total <span>{{ $subTotal }} VND</span></div>
+                                <div class="checkout__order__total">Total <span>{{ number_format($subTotal) }} VND</span></div>
                                 <button type="submit" wire:click.prevent='checkout' class="site-btn">PLACE
                                     ORDER</button>
 
-                                
+
                             @endif
                         </div>
                     </div>

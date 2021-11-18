@@ -13,18 +13,19 @@ class Shop extends Component
 
     protected $products;
 
-    public $sort ='name';
+    public $sort = 'name';
 
-
+    public $search = '';
     // protected $latestProducts;
 
     protected $paginationTheme = 'bootstrap';
 
-    public function mount(){
+    public function mount()
+    {
 
-        if($this->sort == 1){
+        if ($this->sort == 1) {
             $this->sort = 'name';
-        }elseif($this->sort ==2){
+        } elseif ($this->sort == 2) {
             $this->sort = 'price';
         }
 
@@ -33,20 +34,20 @@ class Shop extends Component
         $this->latestProducts = $obj->customerGetLatestProduct();
 
         $this->latestProducts->toArray();
-
     }
 
     public function render()
     {
-        return view('livewire.customer.page.shop',[
-            'products' => Product::where('status',1)->orderBy($this->sort)->paginate(15),
+        return view('livewire.customer.page.shop', [
+            'products' => Product::query()
+                ->CustomerSearch($this->search)->where('status', 1)->orderBy('product_type_id')->paginate(15),
             // 'products' =>Product::customerGetAllProduct()
             // 'latestProducts'=>$this->latestProducts,
-        ])
-        ->layout('customer.layout');;
+        ])->layout('customer.layout');
     }
 
-    public function sortBy($column){
+    public function sortBy($column)
+    {
         dd('here');
     }
     public function updatingSearch()

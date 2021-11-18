@@ -2,7 +2,7 @@
 <div class="sidebar-menu">
     <div class="sidebar-header">
         <div class="logo">
-            <a href="index.html"><img src="{{ asset('admin/assets') }}//images/icon/logo.png" alt="logo"></a>
+            <a href="{{ route('admin.index') }}"><img src="{{ asset('client/img/logo.png') }}" alt="logo"></a>
         </div>
     </div>
     <div class="main-menu">

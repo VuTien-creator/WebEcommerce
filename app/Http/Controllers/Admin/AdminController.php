@@ -7,84 +7,97 @@ use App\Http\Requests\Admin\ProductRequest;
 use App\Models\Bill;
 use App\Models\Product;
 
-class AdminController extends Controller {
-	//
-	public function index() {
-		$manage = Product::orderBy('quantity_product_sold', 'desc')->take(8)->get()
-			->map(function ($product) {
+class AdminController extends Controller
+{
+    //
+    public function index()
+    {
+        $manage = Product::orderBy('quantity_product_sold', 'desc')->take(16)->get()
+            ->map(function ($product) {
+                $data = [];
+                $data[$product->name] = $product->quantity_product_sold;
+                return $data;
+            })->collapse();
+        $data = [];
+        foreach ($manage as $name => $sold) {
 
-				$data = [];
-				$data[$product->name] = $product->quantity_product_sold;
-				return $data;
-
-			})->collapse();
-            $data =[];
-            foreach($manage as $name =>$sold){
-                $data[] = [
-                    'name' => $name,
-                    'sold' => $sold,
-                    'color' => '#7474f0'
-                ];
+            if ($sold > 50) {
+                $color = 'rgb(255, 99, 132)';
+            } else {
+                $color = '#7474f0';
             }
-                // dd($manage);
-		return view('admin.index', [
-			'data' => json_encode($data),
-		]);
-	}
 
-	//product
-	public function product() {
-		$products = Product::adminGetAllProduct();
-		return view('admin.product', [
-			'products' => $products,
-		]);
-	}
+            $data[] = [
+                'name' => $name,
+                'sold' => $sold,
+                'color' => $color
+            ];
+        }
+        // dd($manage);
+        return view('admin.index', [
+            'data' => json_encode($data),
+        ]);
+    }
 
-	public function formEditProduct($id) {
-		$product = Product::findOrFail($id);
+    //product
+    public function product()
+    {
+        $products = Product::adminGetAllProduct();
+        return view('admin.product', [
+            'products' => $products,
+        ]);
+    }
 
-		return view('test', [
-			'test' => $product,
-		]);
-	}
+    public function formEditProduct($id)
+    {
+        $product = Product::findOrFail($id);
 
-	public function editProduct($id, ProductRequest $request) {
-		// public function editProduct(Product $product, ProductRequest $request){
-		$product = Product::findOrFail($id);
+        return view('test', [
+            'test' => $product,
+        ]);
+    }
 
-		if ($product->update($request->all())) {
-			return true;
-		}
-		return false;
-	}
+    public function editProduct($id, ProductRequest $request)
+    {
+        // public function editProduct(Product $product, ProductRequest $request){
+        $product = Product::findOrFail($id);
 
-	// product Type
+        if ($product->update($request->all())) {
+            return true;
+        }
+        return false;
+    }
 
-	public function getProductByTypeId($id) {
-		// dd(Product::where('product_type_id',$id)->get());
-		$products = Product::adminGetProductByTypeId($id);
+    // product Type
 
-		return view('admin.product', [
-			'products' => $products,
-		]);
-	}
+    public function getProductByTypeId($id)
+    {
+        // dd(Product::where('product_type_id',$id)->get());
+        $products = Product::adminGetProductByTypeId($id);
 
-	//admin management
-	public function manage() {
+        return view('admin.product', [
+            'products' => $products,
+        ]);
+    }
 
-		$bills = Bill::adminGetAllBill();
-		// dd($bills);
-		return view('admin.manage', [
-			'bills' => $bills,
-		]);
-	}
+    //admin management
+    public function manage()
+    {
 
-	public function billDetail($id) {
-		$bill = new Bill;
-		$billDetail = $bill->getBillDetail($id);
+        $bills = Bill::adminGetAllBill();
+        // dd($bills);
+        return view('admin.manage', [
+            'bills' => $bills,
+        ]);
+    }
 
-		return view('admin.bill-detail', [
-			'billDetail' => $billDetail,
-		]);
-	}
+    public function billDetail($id)
+    {
+        $bill = new Bill;
+        $billDetail = $bill->getBillDetail($id);
+
+        return view('admin.bill-detail', [
+            'billDetail' => $billDetail,
+        ]);
+    }
 }

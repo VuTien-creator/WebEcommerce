@@ -6,18 +6,31 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg col-md">
-
+                    {{-- <div class="single-sidebar">
+                        <input type="text" wire:model.debounce.300ms="search" placeholder="Search products...">
+                    </div> --}}
+                    <div class="col-lg">
+                        <div class="hero__search">
+                            <div class="hero__search__form">
+                                <form action="#">
+                                    <input type="text" wire:model.debounce.300ms="search"
+                                        placeholder="Search products...">
+                                    {{-- <button type="submit" class="site-btn">SEARCH</button> --}}
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                     <div class="filter__item">
                         <div class="row">
                             <div class="col-lg-4 col-md-5">
-                                <div class="filter__sort">
+                                {{-- <div class="filter__sort">
                                     <span>Sort By</span>
                                     <select class="" wire:model="sort">
                                         <option > select</option>
                                         <option value="1">Name</option>
                                         <option value="2">Price</option>
                                     </select>
-                                </div>
+                                </div> --}}
                             </div>
                             <div class="col-lg-4 col-md-4">
                                 <div class="filter__found">
@@ -33,15 +46,18 @@
                             <div class="col-lg-4 col-md-6 col-sm-6 ">
                                 <div class="product__item">
                                     <div class="product__item__pic">
-                                        <a href="{{ route('customer.productDetail',$product->id) }}">
+                                        <a href="{{ route('customer.productDetail', $product->id) }}">
                                             <img src="{{ $product->image }}" alt="{{ $product->image }}">
                                         </a>
                                         <ul class="product__item__pic__hover">
-                                            <livewire:customer.feature.add-to-cart :product="$product" :key="time().$product->id">
+                                            <livewire:customer.feature.add-to-cart :product="$product"
+                                                :key="time().$product->id">
                                         </ul>
                                     </div>
                                     <div class="product__item__text">
-                                        <h6><a href="{{ route('customer.productDetail',$product->id) }}">{{ $product->name }}</a></h6>
+                                        <h6><a
+                                                href="{{ route('customer.productDetail', $product->id) }}">{{ $product->name }}</a>
+                                        </h6>
                                         <h5>{{ number_format($product->price) }} VND</h5>
                                     </div>
                                 </div>
@@ -54,7 +70,7 @@
                                 <p>Showing {{ $products->firstItem() }} to {{ $products->lastItem() }}</p>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6">
-                                {{ ($products->links()) }}
+                                {{ $products->links() }}
                             </div>
                         </div>
                     </div>
