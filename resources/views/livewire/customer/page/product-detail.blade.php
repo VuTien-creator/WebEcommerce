@@ -42,6 +42,7 @@
                         </div>
                         @endif
                         <ul>
+                            <li><b>Sold</b> <span> <samp>{{ $product->quantity_product_sold }}</samp></span></li>
                             <li><b>Availability</b> <span>{!! $product->quantity <= 0 ? '<samp>Out of stock</samp>' : 'In Stock' !!}</span></li>
                             <li><b>Shipping</b> <span> <samp>Free pickup</samp></span></li>
                         </ul>

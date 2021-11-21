@@ -30,7 +30,7 @@
                                     @foreach ($cart as $id => $product)
                                         <tr>
                                             <td class="shoping__cart__item">
-                                                <img src="{{ $product['image'] }}" alt="{{ $product['name'] }}">
+                                                {{-- <img src="{{ $product['image'] }}" alt="{{ $product['name'] }}"> --}}
                                                 <a href="{{ route('customer.productDetail', $id) }}">
                                                     <h5>{{ $product['name'] }}</h5>
                                                 </a>
@@ -83,8 +83,8 @@
                         <div class="shoping__checkout">
                             <h5>Cart Total</h5>
                             <ul>
-                                <li>Subtotal <span>{{ $cartSubTotal }} VND</span></li>
-                                <li>Total <span>{{ $cartSubTotal }} VND</span></li>
+                                <li>Subtotal <span>{{ number_format($cartSubTotal) }} VND</span></li>
+                                <li>Total <span>{{ number_format($cartSubTotal) }} VND</span></li>
                             </ul>
                             <a href="{{ route('customer.checkout') }}" class="primary-btn">PROCEED TO CHECKOUT</a>
                         </div>

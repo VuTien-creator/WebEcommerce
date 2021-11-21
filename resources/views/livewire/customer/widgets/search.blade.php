@@ -35,7 +35,7 @@
                         </div>
                     </div>
                     @if (Request::path() == '/')
-                        <div class="hero__item set-bg" data-setbg="{{ asset('client') }}/img/hero/banner.jpg">
+                        <div class="hero__item set-bg" data-setbg="{{ asset('client') }}/img/banner/banner.png">
                             <div class="hero__text">
                                 <span>Good Choice</span>
                                 <h2>New Product <br /></h2>

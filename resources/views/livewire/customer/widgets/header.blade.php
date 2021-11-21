@@ -78,7 +78,7 @@
 
                                 @auth
                                 <div class="header__top__right__social">
-                                    <a href="#"><i class="fa fa-user"></i> Profile</a>
+                                    <a href="{{ route('profile.show') }}"><i class="fa fa-user"></i> Profile</a>
                                 </div>
                                 <div class="header__top__right__auth">
                                     {{-- <a href=""><i class="fa fa-user"></i> Logout</a> --}}

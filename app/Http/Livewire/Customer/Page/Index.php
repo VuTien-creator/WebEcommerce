@@ -12,11 +12,14 @@ class Index extends Component
 
     public $latestProducts;
 
+    public $bestSalerProducts;
+
     public function mount(){
         $obj = new ProductType;
         $products = new Product;
         $this->latestProducts = $products->customerGetLatestProduct();
-        $this->categories = $obj->customerGetCategories();
+        // $this->categories = $obj->customerGetCategories();
+        $this->bestSalerProducts = $products->where('status',1)->orderBy('quantity_product_sold', 'desc')->take(8)->get();
     }
 
     public function render()
