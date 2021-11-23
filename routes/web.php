@@ -63,5 +63,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('manage-customer-account',[AdminController::class,'manageCustomer'])->name('admin.manageCustomer');
         Route::get('manage-admin-account',[AdminController::class,'manageAdmin'])->name('admin.manageAdmin');
 
+        //management bill
+
+        Route::post('management-bill',[AdminController::class,'manageBill'])->name('admin.manageBill');
+
     });
 });
