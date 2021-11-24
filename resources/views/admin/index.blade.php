@@ -38,6 +38,12 @@
                         </div>
                         <div>
                             <canvas id="billChart" data-chart="{{ $bills }}"></canvas>
+                            <form action="{{ route('admin.export') }}" method="POST">
+                                @csrf
+                                <input type="hidden" value="{{ $bills }}" name="data">
+                                <button type="submit" class="btn btn-primary">Export</button>
+                            </form>
+
                         </div>
                     </div>
                 </div>

@@ -9,7 +9,7 @@
         <div class="menu-inner">
             <nav>
                 <ul class="metismenu" id="menu">
-                    <li class="{{ Request::path() == 'admin/index' ? 'active' : '' }}">
+                    <li class="{{ Request::path() == 'admin/index' ? 'active' :  '' }}">
                         <a href="{{ route('admin.index') }}" aria-expanded="true"><i
                                 class="ti-dashboard"></i><span>Index</span></a>
                         {{-- <ul class="collapse">

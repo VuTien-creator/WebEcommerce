@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\ExportFile;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ProductRequest;
 use App\Models\Bill;
@@ -12,42 +13,37 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-
+use Maatwebsite\Excel\Facades\Excel;
 
 class AdminController extends Controller
 {
 
-    //
+    // private static $data;
+    // private static $bills;
+
+    private  $data;
+    private $bills;
+
+    public function __construct()
+    {
+        $this->bills = $this->getManageBill();
+        $this->data = $this->getProductSold();
+        // self::$bills = $this->getManageBill();
+        // self::$data = $this->getProductSold();
+    }
+
     public function index()
     {
-        $bills = $this->getManageBill();
-        $data = $this->getProductSold();
-
+        // dd($this->bills);
         return view('admin.index', [
-            'data' => json_encode($data),
-            'bills' => json_encode($bills),
+            'data' => json_encode($this->data),
+            'bills' => json_encode($this->bills),
         ]);
     }
 
     public function getManageBill()
     {
-        $firstDay = Carbon::now()->firstOfMonth()->format('Y-m-d');
-        $lastDay = Carbon::now()->lastOfMonth()->format('Y-m-d');
-
-        $bills = Bill::select(
-            DB::raw("(sum(total_price)) as total"),
-            DB::raw("(DATE_FORMAT(created_at, '%Y-%m')) as date")
-        )
-            ->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m')"))
-            ->get()
-            ->map(function ($bill) {
-                $data = [
-                    'date'  => $bill->date,
-                    'total' => $bill->total
-                ];
-                return $data;
-            });
-        return $bills;
+        return $this->getDataByMonth();
     }
 
     public function manageBill(Request $request)
@@ -61,14 +57,40 @@ class AdminController extends Controller
         $firstDay = $data['startMonth'].'-01';
         $lastDay = $data['endtMonth'].'-31';
 
-        // dd($lastDay);
+        $this->bills = $this->getDataByMonth($firstDay, $lastDay);
+        // self::$bills = $this->getDataByMonth($firstDay, $lastDay);
 
-        $bills = Bill::select(
-            DB::raw("(sum(total_price)) as total"),
-            DB::raw("(DATE_FORMAT(created_at, '%Y-%m')) as date")
-        )
+
+        // self::$data = $this->getProductSold();
+        $this->data = $this->getProductSold();
+
+
+        // dd($this);
+        // return redirect()->route('admin.index');
+        return view('admin.index', [
+            'data' => json_encode($this->data),
+            'bills' => json_encode($this->bills),
+            // 'bills' => json_encode($this->bills),
+            // 'data' => json_encode(self::$data),
+            // 'bills' => json_encode(self::$bills),
+        ]);
+
+    }
+
+
+    public function getDataByMonth($firstDay = null, $lastDay= null)
+    {
+
+        if(is_null($firstDay) && is_null($lastDay)){
+            $year = Carbon::now()->firstOfMonth()->format('Y');
+            $month= Carbon::now()->firstOfMonth()->format('m');
+            $firstDay = $year .'-'.($month-2).'-01';
+            // dd($firstDay);
+            $bills = Bill::select(
+                DB::raw("(sum(total_price)) as total"),
+                DB::raw("(DATE_FORMAT(created_at, '%Y-%m')) as date")
+            )
             ->where('created_at','>=',$firstDay)
-            ->where('created_at','<=',$lastDay)
             ->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m')"))
             ->get()
             ->map(function ($bill) {
@@ -78,13 +100,38 @@ class AdminController extends Controller
                 ];
                 return $data;
             });
-        // dd($bills);
-            
-        $data = $this->getProductSold();
-        return view('admin.index', [
-            'data' => json_encode($data),
-            'bills' => json_encode($bills),
-        ]);
+            return $bills;
+        }
+
+        $bills = Bill::select(
+            DB::raw("(sum(total_price)) as total"),
+            DB::raw("(DATE_FORMAT(created_at, '%Y-%m')) as date")
+        )
+            ->where('created_at', '>=', $firstDay)
+            ->where('created_at', '<=', $lastDay)
+            ->groupBy(DB::raw("DATE_FORMAT(created_at, '%Y-%m')"))
+            ->get()
+            ->map(function ($bill) {
+                $data = [
+                    'date'  => $bill->date,
+                    'total' => $bill->total
+                ];
+                return $data;
+            });
+        return $bills;
+    }
+
+    public function export(Request $request)
+    {
+
+        $bills = $request->data;
+        $bills = (json_decode($bills));
+
+        $bills = collect($bills);
+
+        $export = new ExportFile($bills);
+        return Excel::download($export, 'data.xlsx');
+
     }
 
     public function getProductSold()

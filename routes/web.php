@@ -67,5 +67,7 @@ Route::middleware(['auth'])->group(function () {
 
         Route::post('management-bill',[AdminController::class,'manageBill'])->name('admin.manageBill');
 
+        Route::post('download-excel',[AdminController::class,'export'])->name('admin.export');
+
     });
 });
