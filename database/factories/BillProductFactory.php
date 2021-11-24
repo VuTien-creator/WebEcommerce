@@ -17,7 +17,10 @@ class BillProductFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'bill_id' => rand(10,100),
+            'product_id' => rand(13,28),
+            'price' => rand(10000000,30000000),
+            'quantity' => rand(1,5),
         ];
     }
 }
