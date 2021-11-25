@@ -9,7 +9,7 @@ class Bill extends Model
 {
     use HasFactory;
     protected $table = 'bills';
-    protected $fillable = ['user_id', 'total_price'];
+    protected $fillable = ['user_id', 'total_price','path_qr_code'];
 
     public function products()
     {
@@ -61,5 +61,9 @@ class Bill extends Model
     public function scopeAdminGetAllBill($query)
     {
         return $this->joinWithUser();
+    }
+
+    public function genarateQRcode($id){
+
     }
 }
