@@ -41,9 +41,54 @@
                 {{-- </div> --}}
     </div>
 
-    {{ $slot }}
 
-    
+
+    <section class="product spad">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg col-md-7">
+                    <div class="filter__item">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-5">
+
+                            </div>
+                            <div class="col-lg-4 col-md-4">
+                                <div class="filter__found">
+                                    <h3>QR Code Of Your Order</h3>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-3">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        @foreach ($data as $item)
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="product__item">
+                                    @if (!empty($item['path']))
+                                        {{-- <div class="product__item__pic set-bg" style="object-fit: contain, height: 80px" data-setbg="{{ asset($item['path']) }}">
+                                        </div> --}}
+                                        <img src="{{ asset($item['path'])  }}" alt="">
+                                    @else
+                                        <div class="product__item__pic set-bg" data-setbg="{{ asset('qrcode/Donthave.png') }}">
+                                        </div>
+                                    @endif
+                                    <div class="product__item__text">
+                                        <h6>Buy At: {{ $item['date'] }}</h6>
+                                        <h5>Total: {{ number_format($item['total_price']) }} VND</h5>
+
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Product Section End -->
 
     <livewire:customer.widgets.footer>
 

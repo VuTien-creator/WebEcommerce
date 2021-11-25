@@ -3,12 +3,16 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductTypeController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Livewire\Customer\Page\Cart;
 use App\Http\Livewire\Customer\Page\Checkout;
 use App\Http\Livewire\Customer\Page\Index;
 use App\Http\Livewire\Customer\Page\ProductDetail;
 use App\Http\Livewire\Customer\Page\Shop;
 use Illuminate\Support\Facades\Route;
+
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -31,12 +35,18 @@ Route::get('/product-detail-{id}',ProductDetail::class)->name('customer.productD
 
 Route::get('/cart',Cart::class)->name('customer.cart');
 
+Route::get('bill-detail-{id}',[CustomerController::class,'billDetail'])->name('customer.billDetail');
+
+// Route::get('test', (function(){
+//     return view('test');
+// } ));
 
 
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/checkout',Checkout::class)->name('customer.checkout');
 
+    Route::get('history-order',[CustomerController::class,'historyOrder'])->name('customer.historyOrder');
 
     //Admin role
     Route::group(['middleware'=>'admin','prefix'=>'admin'],function () {
@@ -68,6 +78,9 @@ Route::middleware(['auth'])->group(function () {
         Route::post('management-bill',[AdminController::class,'manageBill'])->name('admin.manageBill');
 
         Route::post('download-excel',[AdminController::class,'export'])->name('admin.export');
+
+        Route::get('qr-code',[AdminController::class, 'QRcode'])->name('admin.qrcode');
+
 
     });
 });
