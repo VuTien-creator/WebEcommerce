@@ -8,6 +8,8 @@ use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+
 
 class Checkout extends Component
 {
@@ -60,7 +62,8 @@ class Checkout extends Component
             DB::transaction(function () use ($cart) {
                 $bill = Bill::create([
                     'user_id' => auth()->id(),
-                    'total_price' => Cart::total()
+                    'total_price' => Cart::total(),
+                    'path_qr_code' => '',
                 ]);
 
                 foreach ($cart as $id => $cartProduct) {
@@ -75,6 +78,14 @@ class Checkout extends Component
                     Product::find($id)->decrement('quantity', $cartProduct['quantity']);
                     Product::find($id)->increment('quantity_product_sold',$cartProduct['quantity']);
                 }
+
+                $path = 'QRcode/'.time().'.svg';
+                $bill->path_qr_code = $path;
+                $bill->update();
+                
+                $data = 'http://127.0.0.1:8000/bill-detail-'.$bill->id;
+
+                QrCode::size(250)->generate($data,'../public/'.$path);
 
                 Cart::clear();
 
