@@ -48,5 +48,4 @@ class ExportFile implements FromCollection, ShouldAutoSize,  WithHeadings, WithM
             $data->total,
         ];
     }
-
 }
