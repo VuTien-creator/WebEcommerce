@@ -45,6 +45,7 @@ class Bill extends Model
             ->select(
                 'bills.total_price as bill_total',
                 'bills.created_at as bill_created',
+                'bills.path_qr_code',
 
                 'users.name as customer_name',
                 'users.email as customer_email',

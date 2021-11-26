@@ -35,7 +35,6 @@ Route::get('/product-detail-{id}',ProductDetail::class)->name('customer.productD
 
 Route::get('/cart',Cart::class)->name('customer.cart');
 
-Route::get('bill-detail-{id}',[CustomerController::class,'billDetail'])->name('customer.billDetail');
 
 // Route::get('test', (function(){
 //     return view('test');
@@ -43,6 +42,10 @@ Route::get('bill-detail-{id}',[CustomerController::class,'billDetail'])->name('c
 
 
 Route::middleware(['auth'])->group(function () {
+
+    Route::get('bill-detail-{id}', [CustomerController::class, 'billDetail'])->name('customer.billDetail');
+
+    Route::get('export-bill-detail-{id}',[CustomerController::class, 'exportBill'])->name('export.billDetail');
 
     Route::get('/checkout',Checkout::class)->name('customer.checkout');
 
