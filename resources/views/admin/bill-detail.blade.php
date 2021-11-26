@@ -62,7 +62,7 @@
                     </div>
                     <div class="invoice-buttons text-right">
                         <a href="{{ route('admin.manage') }}" class="invoice-btn">Back</a>
-                        <a href="{{ route('admin.index') }}" class="invoice-btn">Back To Dashboard</a>
+                        <a href="{{ route('export.billDetail',$billDetail[0]->id) }}" class="invoice-btn">Export Bill</a>
                     </div>
                 </div>
             </div>

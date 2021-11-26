@@ -3,7 +3,6 @@
 
 <head>
     <style>
-
         body {
             margin: 0;
             padding: 0;
@@ -238,9 +237,12 @@
                 <td class="cotSo">{{ number_format($billDetail[0]->bill_total) }} VND</td>
             </tr>
         </table>
-        <div class="footer-left"> By At : {{ date('d-m-Y',strtotime($billDetail[0]->bill_created)) }}<br /></div>
-        {{-- <div class="footer-right"> <br />
-            Nhân viên </div> --}}
+        <div class="footer-left"> By At : {{ date('d-m-Y', strtotime($billDetail[0]->bill_created)) }}<br /></div>
+        <div class="footer-right">
+            <form action="{{ route('export.billDetail',$billDetail[0]->id) }}">
+                <input type="submit" value="Export Bill" />
+            </form>
+        </div>
     </div>
 </body>
 
