@@ -79,10 +79,10 @@ class Checkout extends Component
                     Product::find($id)->increment('quantity_product_sold',$cartProduct['quantity']);
                 }
 
-                $path = 'QRcode/'.time().'.svg';
+                $path = 'qrcode/'.time(). '.svg';
                 $bill->path_qr_code = $path;
                 $bill->update();
-                
+
                 $data = 'http://127.0.0.1:8000/bill-detail-'.$bill->id;
 
                 QrCode::size(250)->generate($data,'../public/'.$path);
